@@ -1,0 +1,70 @@
+package main
+
+import (
+	"log"
+	"net/http"
+	"os"
+	"os/signal"
+	"time"
+)
+
+func main() {
+	server := &http.Server{
+		Addr:         "4000",
+		WriteTimeout: 2 * time.Second,
+	} //自主创建Server对象进行监听
+
+	quit := make(chan os.Signal)
+	signal.Notify(quit, os.Interrupt) //设置退出信号
+
+	mux := http.NewServeMux()     //可实现路由功能
+	mux.Handle("/", &myHandler{}) //根路由可以匹配到所有未使用的路由
+	mux.HandleFunc("/bye", sayBye)
+	// 与HandleFunc不同在于第二个参数必须是具体的类型，而不是单纯的函数
+	server.Handler = mux //实现了Handler接口的对象
+
+	go func() {
+		<-quit
+		if err := server.Close(); err != nil {
+			log.Fatal("Close server:", err)
+		}
+	}()
+
+	//------------------------------
+	// http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	// 	w.Write([]byte("Hello, this is version 1!"))
+	// })
+
+	// 注册HandleFunc函数相应某个路由
+	// 匿名函数
+	// "/" 根路由
+	// 默认使用DefaultSeverMux
+	// http.ResponseWriter 接口
+	// http.Request
+	//-------------------------------
+
+	//http.HandleFunc("/bye", sayBye)
+	// 单独的函数
+
+	log.Println("Strting server... v3")
+	err := server.ListenAndServe()
+	if err == http.ErrServerClosed {
+		log.Print("Server closed under request")
+	} else {
+		log.Fatal("Server closed unexpected")
+	}
+	log.Println("Server exit")
+	// log.Fatal(http.ListenAndServe(":4000", mux)) //开始监听地址
+}
+
+func sayBye(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Bye bye, this is version 1!"))
+}
+
+type myHandler struct{} //结构
+
+func (*myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hello, v2, the request URL is:" + r.URL.String()))
+} // r.URL.String()可以看到当前的请求路径
+
+// 方法
