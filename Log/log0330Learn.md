@@ -326,7 +326,41 @@ func DialTimeout(network, address string, timeout time.Duration) (Conn, error)
 5. 访问控制
 6. 保证/可用性
 
-### 机制
+### Web 攻击手法
+
+---
+
+1. CSRF 攻击
+2. XSS 攻击
+3. SQL 攻击
+
+#### Cross-Site Request Forgery 攻击
+
+跨站请求伪造，可以简单理解为：攻击者可以盗用你的登录信息，以你的身份模拟发送各种请求。
+
+攻击步骤：
+
+1. 登陆受信任的网站A, 并在本地生成Cookie。
+2. 在不退出A的情况下，访问危险网站B。
+
+预防跨域请求攻击的方法：
+
+1. 正确使用GET,POST,和Cookie。
+2. 在非GET请求中增加伪随机数。
+
+一般按照如下方式设计应用
+
+1. GET常用在查看，列举，展示等不需要改变资源属性的时候。
+2. POST常用在下达订单，改变一个资源的属性或者做其他一些事情。
+
+限制资源访问
+
+```go
+mux.Get("/user/:uid", getuser)
+mux.Post("/user/:uid", modifyuser)
+```
+
+### 安全机制
 
 ---
 达到这种安全级别的机制如下：
