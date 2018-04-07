@@ -1,11 +1,11 @@
-# 20180405Learn Docker
+# 20180405 && 0406 Learn Docker
 
 ## 学习计划
 
 ---
-学习Docker 的使用
+学习Docker和其衍生品的使用
 
-## 学习记录
+## 0405 学习记录
 
 Docker 指令图
 ![COM of Docker](https://github.com/luckyOrangeGo/studyLog/blob/master/Docker/dockercmd.jpg)
@@ -322,3 +322,160 @@ docker container run --rm -p 80:3000 cxxvcheng/testing-node
 ```
 
 [http://localhost/](http://localhost/)
+
+## 0406 学习记录
+
+学习docker Volume 和 docker-compose
+
+---
+
+## Docker Volume
+
+## CMD
+
+---
+Usage:  docker volume COMMAND
+
+    create      Create a volume
+    inspect     Display detailed information on one or more volumes
+    ls          List volumes
+    prune       Remove all unused local volumes
+    rm          Remove one or more volumes
+
+`docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True -v mysql-db:/var/lib/mysql mysql`
+
+Mapping a host flie or dir to(**and OVERWRITE**) a container file or dir
+
+`docker container run -v /Users/cxxvc/Documents/GitHub:/path/container` (Mac/Linux)
+
+`docker container run -v //c/Users/%USERNAME%/Documents/GitHub:/path/container` **(Windows)**
+
+`$(pwd)` 当前目录(Mac/Linux)
+
+`%cd%` 当前目录**(Windows)**
+
+### Example Jekyll-serve
+
+```bash
+docker run -p 80:4000 -v //c/Users/cxxvc/Documents/GitHub/studyLog/Docker/bindmount-sample-1:/site --name jekyll-serve bretfisher/jekyll-serve
+```
+
+## Docker Compose learn
+
+[Docker-Compose官方文档](https://docs.docker.com/compose/compose-file/)
+
+[YAML Reference](http://yaml.org/refcard.html)
+
+## docker-compose CLI
+
+---
+最常用的两个命令
+
+`docker-compose up` # 设置 volumes/networks 并启动所有容器
+
+`docker-compose down -v` # 停止所有容器并移除 container/volume/network
+
+### Example of docker-compose.yml
+
+---
+[durpal image doc](https://hub.docker.com/_/drupal/)
+
+[postgres image doc](https://hub.docker.com/_/postgres/)
+
+docker-compose.yaml
+
+```yaml
+version: '2'
+
+services:
+  drupal:
+    image: drupal
+    ports:
+      - "8080:80"
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles
+      - drupal-sites:/var/www/html/sites
+      - drupal-themes:/var/www/html/themes
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=mypasswd
+
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
+```
+
+CMD
+
+```bash
+docker-compose up
+docker-compose down -v
+```
+
+### docker-compose build
+
+---
+
+在本文件夹中有四个文件
+
+- nginx.Dockerfile
+- nginx.conf
+- docker-compose.yml
+- html
+
+示例网站来源于 [startbootstrap.com](https://startbootstrap.com/template-overviews/agency/)
+
+nginx.Dockerfile
+
+```Dockerfile
+FROM nginx:1.13
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+```
+
+nginx.conf
+
+```conf
+server {
+
+  listen 80;
+
+  location / {
+
+    proxy_pass         http://web;
+    proxy_redirect     off;
+    proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host $server_name;
+
+  }
+}
+```
+
+docker-compose.yml
+
+```yaml
+version: '2'
+
+# 仅使用 nginx.conf 到 image
+
+services:
+  proxy:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    ports:
+      - '80:80'
+  web:
+    image: httpd
+    volumes:
+      - ./html:/usr/local/apache2/htdocs/
+```
+
+`docker-compose up -d` # 设置 volumes/networks 并在后台启动所有容器
+`docker-compose down --rmi local` # 停止所有容器并移除 container/volume/network/images
