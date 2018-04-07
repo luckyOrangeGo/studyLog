@@ -7,6 +7,9 @@
 
 ## 学习记录
 
+Docker 指令图
+![COM of Docker](https://github.com/luckyOrangeGo/studyLog/blob/master/Docker/dockercmd.jpg)
+
 ### 指令
 
 ---
@@ -195,7 +198,7 @@ docker logout
 ```Dockerfile
 # NOTE: this example is taken from the default Dockerfile for the official nginx Docker Hub Repo
 # https://hub.docker.com/_/nginx/
-# NOTE: This file is slightly different then the video, because nginx versions have been updated 
+# NOTE: This file is slightly different then the video, because nginx versions have been updated
 #       to match the latest standards from docker hub... but it's doing the same thing as the video
 #       describes
 FROM debian:stretch-slim
@@ -308,7 +311,7 @@ exec "$@"
 
 >Build MY OWN Image Dockerfile
 
-[Dockerfile]
+[Dockerfile](https://github.com/luckyOrangeGo/studyLog/blob/master/Docker/dockerfile-assignment-1/Dockerfile)
 
 ```bash
 docker container run --rm -p 80:3000 testnode
