@@ -7,11 +7,11 @@
 ## docker-compose CLI
 
 ---
-Two most common commands are
+最常用的两个命令
 
-`docker-compose up` # setup volumes/networks and start all containers
+`docker-compose up` # 设置 volumes/networks 并启动所有容器
 
-`docker-compose down` # stop all containers and remove cont/vol/net
+`docker-compose down -v` # 停止所有容器并移除 container/volume/network
 
 ### Example of docker-compose.yml
 
@@ -114,3 +114,6 @@ services:
     volumes:
       - ./html:/usr/local/apache2/htdocs/
 ```
+
+`docker-compose up -d` # 设置 volumes/networks 并在后台启动所有容器
+`docker-compose down --rmi local` # 停止所有容器并移除 container/volume/network/images

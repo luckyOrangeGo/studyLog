@@ -1,0 +1,27 @@
+version: '2'
+
+service:
+  drupal:
+    image: custom-drupal #如果是drupal ,会自动build最新的版本
+    build: . #现在会读取Dockerfile文件建立镜像
+    ports:
+      - "8080:80"
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles
+      - drupal-sites:/var/www/html/sites
+      - drupal-themes:/var/www/html/themes
+
+  postgres:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_PASSWORD=mypasswd
+    volumes:
+      - drupal-data:/var/lib/postgresql/data
+
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
+  drupal-data:
