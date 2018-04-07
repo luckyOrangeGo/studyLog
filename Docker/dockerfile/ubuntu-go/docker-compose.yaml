@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+    ubuntu:
+      image: ubuntu-go:latest
+      volumes:
+        - C:\\Users\\cxxvc\\go\\src:/opt/gopath/src
+      ports:
+        - 8888:8888
+

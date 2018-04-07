@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+    mongodb:
+      image: mongo:3.6.2
+      volumes:
+        - ./:/bitnami/mongodb
+      ports:
+        - 27017:27017
+

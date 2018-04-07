@@ -1,0 +1,1 @@
+winpty docker run -it --rm -p 8888:8888 -v C:\\Users\\cxxvc\\go\\src:/opt/gopath/src 325927299f7a bash
