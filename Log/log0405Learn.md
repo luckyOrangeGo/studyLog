@@ -169,6 +169,21 @@ docker image ls
 docker image history $IMAGE_ID || $REPOSITORY:TAG
 
 # returns JSON metadata about the image
-docker image inspect $IMAGE_ID || $REPOSITORY:TAG
+docker image inspect $IMAGE_ID || $REPOSITORY[:TAG]
 
+docker image tag $SOURCE_IMAGE[:TAG] $TARGET_IMAGE[:TAG]
+
+#uploads changed layers to a image registry (default is Hub)
+docker image push $REPOSITORY
 ```
+
+```bash
+docker login <server>
+# default to logging in Hub
+
+docker logout
+```
+
+### Dockerfile
+
+---
