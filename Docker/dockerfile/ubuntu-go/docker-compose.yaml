@@ -2,9 +2,9 @@ version: '2'
 
 services:
     ubuntu:
-      image: ubuntu-go:latest
+      image: ubuntu_peer_go
       volumes:
-        - C:\\Users\\cxxvc\\go\\src:/opt/gopath/src
+        - C:\\Users\\cxxvc\\go\\src:/go/src
       ports:
         - 8888:8888
 
