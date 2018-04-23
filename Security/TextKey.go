@@ -12,7 +12,7 @@ import (
 
 func main() {
 	if len(os.Args) < 3 {
-		fmt.Println("使用说明:\ttianshu key file [mode]\nkey:\t任何可显示字符\nfile:\t要处理的文件\nmode:\t省略为加密,带有该项为解密(值任意)")
+		fmt.Println("使用说明:\tTextKey.exe key file [mode]\nkey:\t任何可显示字符\nfile:\t要处理的文件\nmode:\t省略为加密,带有该项为解密(值任意)")
 		os.Exit(0)
 	}
 	//第一个参数用于生成密钥
