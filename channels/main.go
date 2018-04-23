@@ -19,7 +19,7 @@ func main() {
 }
 
 func checkLink(link string) {
-	_, err := http.Get(link)
+	_, err := http.Get(link) //单线程在这里卡住了
 	if err != nil {
 		fmt.Println(link, "might be donw!")
 		return
