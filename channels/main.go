@@ -20,8 +20,8 @@ func main() {
 		go checkLink(link, c) // 在函数前面加go 使其变成独立线程
 	}
 
-	for i := 0; i < len(links); i++ {
-		fmt.Println(<-c)
+	for {
+		go checkLink(<-c, c)
 	}
 }
 
