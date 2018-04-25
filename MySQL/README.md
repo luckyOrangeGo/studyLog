@@ -89,6 +89,14 @@ net stop mysql
 创建成功会显示
 >Query OK, 1 row affected (0.06 sec)
 
+	CREATE { DATABASE | SCHEMA } [IF NOT EXISTS] db_name  [DEFAULT] CHARACTER SET [=] charset_name
+创建数据表
+
+	mysq1>CREATE TABLE tb1(
+	->username VARCHAR(20), 
+	->age TINYINT UNSIGNED, 
+	->salary FLOAT(8,2)UNSIGNED ->);
+
 ---
 
 #### 查看数据库
@@ -110,7 +118,17 @@ net stop mysql
     +--------------------+
     7 rows in set (0.00 sec)
 
----
+完整命令
+
+	SHOW {DATABASES I SCHEMAS}[LIKE 'pattern'I WHERE expr]
+
+查看警告信息
+
+	SHOW WARNINGS;
+	
+查看创建信息
+
+	SHOW CREATE DATABASE db_name;
 
 #### 选择数据库
 
@@ -120,6 +138,11 @@ net stop mysql
 >Database changed
 
 ---
+
+#### 修改数据库
+
+	ALTER{DATABASE I SCHEMA} [db_name] [DEFAULT] CHARACTER SET [=] charset_name
+
 
 #### 删除数据库
 
