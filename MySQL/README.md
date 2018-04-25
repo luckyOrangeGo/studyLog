@@ -14,6 +14,74 @@ net stop mysql
 
 ### 基本操作
 
+#### 登陆数据库
+
+	-D，--database=name打开指定数据库
+
+	-delimiter=name指定分隔符
+
+	-h，--host=name服务器名称
+
+	-p，--password【=name】密码
+
+	-P，--port=#端口号
+
+	-prompt=name设置提示符
+
+	-u，--user=name用户名
+
+	-V，--version输出版本信息并且退出
+
+- MySQL退出
+
+		mysql>exit；
+		mysql>quit；
+		mysql>\q；
+
+#### 修改MySQL提示符
+
+连接客户端时通过参数指定
+
+	she11>mysq1-uroot-proot--prompt 提示符
+
+连接上客户端后，通过prompt命令修改
+
+	mysq1>prompt提示符
+
+参数 | 描述
+------|------
+\D | 完整的日期
+\d | 当前数据库
+\h | 服务器名称
+\u | 当前用户
+
+例如：
+
+	mysq1>PROMPT \u@\h-\d>
+
+### MySQL常用命令
+
+#### MySQL语句的规范
+
+- 关键字与函数名称全部大写
+
+- 数据库名称、表名称、字段名称全部小写
+
+- SQL语句必须以分号结尾
+
+
+#### 显示当前服务器版本
+
+	SELECT VERSION();
+
+#### 显示当前日期时间
+
+	SELECT NOW();
+
+#### 显示当前用户
+
+	SELECT USER();
+
 #### 创建数据库
 
     mysql> CREATE DATABASE databaseTest;
