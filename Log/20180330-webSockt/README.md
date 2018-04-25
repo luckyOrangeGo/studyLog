@@ -3,7 +3,7 @@
 ## 学习计划
 
 ---
-今天主要学习WebSorcket 和 Web加密 
+今天主要学习WebSorcket 和 Web加密
 
 ## WebSorcket
 
