@@ -4,6 +4,26 @@
 
 >易于配置，可重复使用的环境。
 
+vagrant 不可与 Docker必备的 Hyper-V功能同时开启，因此如果安装了docker，必须停止Docker和Hyper-V功能，CMD命令如下
+
+启动Hyper-V
+
+    dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All
+
+关闭Hyper-V
+
+    dism.exe /Online /Disable-Feature:Microsoft-Hyper-V-All
+
+或者使用POWERSHELL，命令如下
+
+启动Hyper-V
+
+    Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V –All
+
+关闭Hyper-V
+
+    Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+
 ### testbox01指令
 
 #### Box建立
