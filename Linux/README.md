@@ -199,6 +199,15 @@ end
 
 `vagrant halt`
 
+测试httpd
+
+    sudo systemctl is-active httpd
+    sudo systemctl status httpd
+    sudo systemctl start httpd
+    sudo systemctl is-active httpd
+    sudo systemctl status httpd
+    sudo cat /var/Log/httpd/error_Log
+
 ### Vagrantfile
 
 ```conf
