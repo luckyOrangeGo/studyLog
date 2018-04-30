@@ -77,6 +77,14 @@ Ctrl-b与`翻页`操作相同。
 
 `CTRL-]` 下一个单词
 
+## set 设置
+
+`:set is?`  显示`incsearch` 表示**查找提示功能**打开，未打开显示`noincsearch`，使用`:set is` 打开. `:set nois`关闭
+
+`:set hls?`  显示`hlsearch` 表示**高亮查找功能**打开，未打开显示`nohlsearch`，使用`:set hls` 打开. `:set nohls`关闭
+
+`:set nu` 打开行标   `:set nonu` 关闭行标
+
 ### 打开标尺
 
 `:set ruler` 和 `:set noruler`
@@ -220,7 +228,37 @@ undo = `u`, redo = `Ctrl-R`
 - `n` 在*光标前*重复上次查找
 - `Shift-N` 在*光标后*重复上次查找
 
-#### 可以在 查找 前加“d”等操作指令
+#### 可以在 查找 前加“d”，“ "ay ”等操作指令
+
+### 替换 - 法则一
+
+`:[range]s/old/new/[flags]`
+
+range 范围
+
+- 默认的是本行
+- `1` 表示文档第一行
+- `1,10` 表示文档第1至10行
+- `.` 表示当前行
+- `$` 表示最后一行
+- `.,$` 表示从当前行到最后一行
+- `%` 是全局 = `1,$`
+
+s = Substitute 替换，/old 查找的旧内容，/new 替换的新内容
+
+/[flags] 常用 `g` 表示所有满足条件的
+
+### 替换 - 法则二
+
+`:/PATTERN-1/,/PATTERN-2/s/old/new/[flags]`
+
+`/PATTERN-1/,/PATTERN-2/` 表示 从PATTERN-1到PATTERN-2之间的所有内容
+
+`/PATTERN-1/`或者/PATTERN-2/，可以用 `.` 或者 `$` 等 替代
+
+### 替换 - 法则三
+
+`:s#PATTERN-old#PATTERN-new#`
 
 ## 常用快捷键
 
