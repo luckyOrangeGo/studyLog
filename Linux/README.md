@@ -224,3 +224,15 @@ Vagrant.configure(2) do |config|
     config.vm.provision "shell", path:"setup.sh"
 end
 ```
+
+## SHELL学习
+
+```bash
+#!bin/bash
+```
+
+`#` = Sharp
+
+`!` = Bang
+
+`#!` = Shebang
