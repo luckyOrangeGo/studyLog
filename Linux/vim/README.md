@@ -228,6 +228,36 @@ undo = `u`, redo = `Ctrl-R`
 - `n` 在*光标前*重复上次查找
 - `Shift-N` 在*光标后*重复上次查找
 
+#### 总结
+
+##### 在同一行搜索
+
+`f{char}` -Forward search
+
+`F{char}` -Reverse search
+
+`t{char}` -Forward till search
+
+`T{char}` -Reverse till search
+
+`;` -Repeat in the same direction
+
+`,` -Repeat in the opposite direction
+
+##### 在全局搜索
+
+`/{pattern}` -Forward search
+
+`?{pattern}` -Reverse search
+
+`n` -Repeat search in the same direction
+
+`N` -Repeat search in the opposite direction
+
+`*` -Forward search for word
+
+`#` -Reverse search for word
+
 #### 可以在 查找 前加“d”，“ "ay ”等操作指令
 
 ### 替换 - 法则一
@@ -259,6 +289,16 @@ s = Substitute 替换，/old 查找的旧内容，/new 替换的新内容
 ### 替换 - 法则三
 
 `:s#PATTERN-old#PATTERN-new#`
+
+### 总结 - Substitute Command 替换指令
+
+Format:
+
+`:[range]s/{pattern}/{string}/[flags]`
+
+Global Substitution:
+
+`:%s/{pattern}/{string}/g`
 
 ## 常用快捷键
 
